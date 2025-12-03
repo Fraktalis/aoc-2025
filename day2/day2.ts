@@ -25,6 +25,27 @@ function computeInvalidIDV1(value: number) {
         return 0;
 }
 
+function computeInvalidIDV2(value: number) {
+            
+    const digitCount = numberOfDigits(value);
+        const sizeMaxOfPattern = Math.floor(digitCount / 2);
+
+        for (let size = 1; size <= sizeMaxOfPattern; size++) {
+            const splittingRegExp = new RegExp(`.{1,${size}}`, "g");
+            const valueFragments = `${value}`.match(splittingRegExp);
+
+            const setOfFragments = new Set(valueFragments);
+
+            if (setOfFragments.size === 1) {
+                console.log("Invalid ID:", value);
+                return value;
+            } 
+        }
+        
+
+        return 0;
+}
+
 let totalSum = 0;
 
 for (let range of ranges) {
@@ -33,8 +54,8 @@ for (let range of ranges) {
     });
 
     for (let value = rangeStart; value <= rangeEnd; value++) {
-        
-        totalSum += computeInvalidIDV1(value);
+
+        totalSum += computeInvalidIDV2(value);
 
 
     }
